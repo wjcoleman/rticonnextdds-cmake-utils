@@ -1026,7 +1026,11 @@ if(NOT RTIME_TOOLCHAIN_FILE)
         "RTIMEHOME/resource/cmake/architectures directory. The target name can be set "
         "using the CMake variables -DRTIME_TARGET or -DRTIMEARCH.")
 else()
-    get_filename_component(RTIME_TARGET "${RTIME_TOOLCHAIN_FILE}" NAME_WE)
+    # Get the full filename with extension (but no directory)
+    get_filename_component(_filename "${RTIME_TOOLCHAIN_FILE}" NAME)
+
+    # Remove ONLY the trailing ".tc"
+    string(REGEX REPLACE "\\.tc$" "" RTIME_TARGET "${_filename}")
     set(RTIME_TARGET ${RTIME_TARGET} CACHE STRING
         "RTI Connext Micro target architecture")
     message(STATUS "Found toolchain file: ${RTIME_TOOLCHAIN_FILE} (see value of RTIME_TOOLCHAIN_FILE)")
