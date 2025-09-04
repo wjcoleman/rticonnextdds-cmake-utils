@@ -403,7 +403,11 @@ macro(_connextdds_codegen_find_codegen use_codegen1 use_micro)
         set(script_name "rtiddsgen")
     endif()
 
-    set(CODEGEN_PATH "${RTICODEGEN_DIR}/${script_name}${script_ext}")
+    if(${use_micro})
+        set(CODEGEN_PATH "${RTI_MICRO_CODEGEN_DIR}/${script_name}${script_ext}")
+    else()
+        set(CODEGEN_PATH "${RTICODEGEN_DIR}/${script_name}${script_ext}")
+    endif()
 
     # Get the absolute path to avoid problems during build time.
     # Otherwise the relative path will go into the module makefiles where

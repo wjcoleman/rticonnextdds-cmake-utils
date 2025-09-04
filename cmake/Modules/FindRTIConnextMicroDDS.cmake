@@ -85,7 +85,7 @@
 #   RTI Connext Micro external dependencies.
 # - ``RTIME_INCLUDE_DIRS``
 #   RTI Connext Micro include directories.
-# - ``RTICODEGEN_DIR``
+# - ``RTI_MICRO_CODEGEN_DIR``
 #   Path to the directory where RTI Codegen is placed.
 # - ``RTICODEGEN``
 #   Path to the RTI Codegen executable.
@@ -863,17 +863,17 @@ if(WIN32)
 endif()
 rtime_log_debug("Codegen script ${codegen_name}")
 
-find_path(RTICODEGEN_DIR
+find_path(RTI_MICRO_CODEGEN_DIR
     NAME "${codegen_name}"
     HINTS
         "${RTIMEHOME}/rtiddsgen/scripts"
-        ENV RTICODEGEN_DIR
+        ENV RTI_MICRO_CODEGEN_DIR
 )
 
-if(NOT RTICODEGEN_DIR)
+if(NOT RTI_MICRO_CODEGEN_DIR)
     set(warning
         "Codegen was not found. Please, check if rtiddsgen is under your "
-        "RTIMEHOME/rtiddsgen/scripts directory or provide it to CMake using -DRTICODEGEN_DIR"
+        "RTIMEHOME/rtiddsgen/scripts directory or provide it to CMake using -DRTI_MICRO_CODEGEN_DIR"
     )
     message(WARNING ${warning})
 else()
@@ -881,7 +881,7 @@ else()
         NAME
             "${codegen_name}"
         HINTS
-            ${RTICODEGEN_DIR}
+            ${RTI_MICRO_CODEGEN_DIR}
         DOC "Path to RTI Codegen"
     )
 
